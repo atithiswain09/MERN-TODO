@@ -21,7 +21,7 @@ const SignUpuserController = async (req, res) => {
 
     // Generate a JWT token
     const token = jwt.sign(
-      { email: user.email }, // Payload
+      { id: user._id }, // Payload
       process.env.JWT_SECRET, // Secret key (make sure it's written as process.env)
       
     );
@@ -70,7 +70,7 @@ const LogInuserController=async(req,res)=>{
                   if(!isPassword){
                     res.status(400).json({message:"Invalid Password Check The Password!!"});
                   }
-                  const token=jwt.sign({email: user.email},process.env.JWT_SECRET);
+                  const token=jwt.sign({id: user._id},process.env.JWT_SECRET);
                   res.cookie=("token",token);
               res.status(200).json({message:"User Login Succesfully",user:{
                 Email:user.email
